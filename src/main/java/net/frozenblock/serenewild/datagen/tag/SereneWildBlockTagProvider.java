@@ -35,7 +35,7 @@ public final class SereneWildBlockTagProvider extends FabricTagProvider.BlockTag
 	}
 
 	@Override
-	protected void addTags(@NotNull HolderLookup.Provider arg) {
+	protected void addTags(@NotNull HolderLookup.Provider lookupProvider) {
 		this.getOrCreateTagBuilder(getTag("sereneseasons:year_round_crops"))
 			.add(WWBlocks.BROWN_SHELF_FUNGI)
 			.add(WWBlocks.RED_SHELF_FUNGI)

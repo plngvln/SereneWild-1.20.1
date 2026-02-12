@@ -82,13 +82,13 @@ public class LogicMixin {
 	)
 	private static boolean sereneWild$fixMeltingA(
 		BlockState blockState, Block block, Operation<Boolean> original,
-		@Share("sereneWild$isSnowlogged") LocalBooleanRef isSnowlogged
+		@Share("sereneWild$snowlogged") LocalBooleanRef snowlogged
 	) {
 		if (SnowloggingUtils.isSnowlogged(blockState)) {
-			isSnowlogged.set(true);
+			snowlogged.set(true);
 			return true;
 		}
-		isSnowlogged.set(false);
+		snowlogged.set(false);
 		return original.call(blockState, block);
 	}
 
@@ -104,9 +104,9 @@ public class LogicMixin {
 		LevelWriter level, BlockPos pos, BlockState state, Operation<Void> original,
 		@Local(argsOnly = true) ServerLevel serverLevel,
 		@Local(ordinal = 0) BlockState topState,
-		@Share("sereneWild$isSnowlogged") LocalBooleanRef isSnowlogged
+		@Share("sereneWild$snowlogged") LocalBooleanRef snowlogged
 	) {
-		if (isSnowlogged.get()) {
+		if (snowlogged.get()) {
 			SnowyBlockUtilsCompat.replaceWithNonSnowyEquivalent(serverLevel, topState, pos);
 			BlockState nonSnowy = SnowyBlockUtilsCompat.getNonSnowyEquivalent(topState);
 			original.call(level, pos, nonSnowy != null ? SnowloggingUtils.getStateWithoutSnow(nonSnowy) : topState);
