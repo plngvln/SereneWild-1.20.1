@@ -43,7 +43,6 @@ public final class SereneWildItemTagProvider extends FabricTagProvider.ItemTagPr
 
 		this.getOrCreateTagBuilder(getTag("sereneseasons:spring_crops"))
 			.add(WWBlocks.BUSH.asItem())
-			.add(WWBlocks.WILLOW_SAPLING.asItem())
 			.add(WWBlocks.CYPRESS_SAPLING.asItem())
 			.add(WWBlocks.BROWN_SHELF_FUNGI.asItem())
 			.add(WWBlocks.RED_SHELF_FUNGI.asItem())
@@ -51,7 +50,6 @@ public final class SereneWildItemTagProvider extends FabricTagProvider.ItemTagPr
 
 		this.getOrCreateTagBuilder(getTag("sereneseasons:summer_crops"))
 			.add(WWBlocks.BUSH.asItem())
-			.add(WWBlocks.WILLOW_SAPLING.asItem())
 			.add(WWBlocks.CYPRESS_SAPLING.asItem())
 			.add(WWBlocks.BAOBAB_NUT.asItem())
 			.add(WWBlocks.COCONUT.asItem())
@@ -74,12 +72,10 @@ public final class SereneWildItemTagProvider extends FabricTagProvider.ItemTagPr
 			.add(WWBlocks.MILKWEED.asItem())
 			.add(WWBlocks.DATURA.asItem())
 			.add(WWBlocks.SEEDING_DANDELION.asItem())
-			.add(WWBlocks.WILLOW_SAPLING.asItem())
 			.add(WWBlocks.CYPRESS_SAPLING.asItem())
 			.add(WWBlocks.BAOBAB_NUT.asItem())
 			.add(WWBlocks.COCONUT.asItem())
 			.add(WWBlocks.MAPLE_SAPLING.asItem())
-			.add(WWBlocks.CLOVERS.asItem())
 			.add(WWBlocks.BROWN_SHELF_FUNGI.asItem())
 			.add(WWBlocks.RED_SHELF_FUNGI.asItem())
 			.add(WWBlocks.TUMBLEWEED.asItem())
@@ -88,7 +84,7 @@ public final class SereneWildItemTagProvider extends FabricTagProvider.ItemTagPr
 
 	@NotNull
 	private TagKey<Item> getTag(String id) {
-		return TagKey.create(this.registryKey, ResourceLocation.parse(id));
+		return TagKey.create(this.registryKey, new ResourceLocation(id));
 	}
 
 }

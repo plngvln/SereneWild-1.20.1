@@ -20,30 +20,18 @@ package net.frozenblock.serenewild.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.frozenblock.lib.feature_flag.api.FeatureFlagApi;
 import net.frozenblock.serenewild.datagen.tag.SereneWildBlockTagProvider;
 import net.frozenblock.serenewild.datagen.tag.SereneWildItemTagProvider;
-import net.minecraft.core.RegistrySetBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public final class SereneWildDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void onInitializeDataGenerator(@NotNull FabricDataGenerator dataGenerator) {
-		FeatureFlagApi.rebuild();
 		final FabricDataGenerator.Pack pack = dataGenerator.createPack();
 
 		// DATA
 		pack.addProvider(SereneWildBlockTagProvider::new);
 		pack.addProvider(SereneWildItemTagProvider::new);
-	}
-
-	@Override
-	public void buildRegistry(@NotNull RegistrySetBuilder registryBuilder) {
-	}
-
-	@Override
-	public @NotNull String getEffectiveModId() {
-		return "serenewild";
 	}
 }

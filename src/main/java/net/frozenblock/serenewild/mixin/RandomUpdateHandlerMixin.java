@@ -1,28 +1,10 @@
-/*
- * Copyright 2025 FrozenBlock
- * This file is part of Serene Wild.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses/>.
- */
-
 package net.frozenblock.serenewild.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.frozenblock.serenewild.util.SnowyBlockUtilsCompat;
 import net.frozenblock.wilderwild.block.impl.SnowloggingUtils;
-import net.frozenblock.wilderwild.block.impl.SnowyBlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
@@ -45,15 +27,19 @@ public class RandomUpdateHandlerMixin {
 		)
 	)
 	private static Block sereneWild$fixSnowloggedMelting(
-		BlockState blockState, Operation<Block> original,
-		@Local ServerLevel serverLevel,
-		@Local(ordinal = 0) BlockPos topAirPos
+		BlockState blockState,
+		Operation<Block> original,
+		@Local(argsOnly = false) ServerLevel serverLevel,
+		@Local(ordinal = 0, argsOnly = false) BlockPos topAirPos
 	) {
 		if (SnowloggingUtils.isSnowlogged(blockState)) {
-			SnowyBlockUtils.replaceWithNonSnowyEquivalent(serverLevel, blockState, topAirPos);
-			serverLevel.setBlockAndUpdate(topAirPos, SnowloggingUtils.getStateWithoutSnow(SnowyBlockUtils.getNonSnowyEquivalent(blockState)));
+			BlockState nonSnowy = SnowyBlockUtilsCompat.getNonSnowyEquivalent(blockState);
+			if (nonSnowy != null) {
+				serverLevel.setBlockAndUpdate(topAirPos, SnowloggingUtils.getStateWithoutSnow(nonSnowy));
+			} else {
+				SnowyBlockUtilsCompat.replaceWithNonSnowyEquivalent(serverLevel, blockState, topAirPos);
+			}
 		}
 		return original.call(blockState);
 	}
-
 }

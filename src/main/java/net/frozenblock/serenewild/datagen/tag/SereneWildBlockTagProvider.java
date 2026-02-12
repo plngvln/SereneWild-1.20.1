@@ -43,7 +43,6 @@ public final class SereneWildBlockTagProvider extends FabricTagProvider.BlockTag
 
 		this.getOrCreateTagBuilder(getTag("sereneseasons:spring_crops"))
 			.add(WWBlocks.BUSH)
-			.add(WWBlocks.WILLOW_SAPLING)
 			.add(WWBlocks.CYPRESS_SAPLING)
 			.add(WWBlocks.BROWN_SHELF_FUNGI)
 			.add(WWBlocks.RED_SHELF_FUNGI)
@@ -51,7 +50,6 @@ public final class SereneWildBlockTagProvider extends FabricTagProvider.BlockTag
 
 		this.getOrCreateTagBuilder(getTag("sereneseasons:summer_crops"))
 			.add(WWBlocks.BUSH)
-			.add(WWBlocks.WILLOW_SAPLING)
 			.add(WWBlocks.CYPRESS_SAPLING)
 			.add(WWBlocks.BAOBAB_NUT)
 			.add(WWBlocks.COCONUT)
@@ -74,7 +72,6 @@ public final class SereneWildBlockTagProvider extends FabricTagProvider.BlockTag
 			.add(WWBlocks.MILKWEED)
 			.add(WWBlocks.DATURA)
 			.add(WWBlocks.SEEDING_DANDELION)
-			.add(WWBlocks.WILLOW_SAPLING)
 			.add(WWBlocks.CYPRESS_SAPLING)
 			.add(WWBlocks.BAOBAB_NUT)
 			.add(WWBlocks.COCONUT)
@@ -90,7 +87,7 @@ public final class SereneWildBlockTagProvider extends FabricTagProvider.BlockTag
 
 	@NotNull
 	private TagKey<Block> getTag(String id) {
-		return TagKey.create(this.registryKey, ResourceLocation.parse(id));
+		return TagKey.create(this.registryKey, new ResourceLocation(id));
 	}
 
 }
